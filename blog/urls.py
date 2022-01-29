@@ -1,5 +1,7 @@
-from django.urls import path
+from django.contrib import admin
+from django.urls import path, include
+from .views import BlogListView
 
 urlpatterns = [
-    #path('tag/<slug:tag_slug>/', #views.post_list, name='post_list_by_tag'),
+    path('', BlogListView.as_view(), name='blog_list')
 ]
