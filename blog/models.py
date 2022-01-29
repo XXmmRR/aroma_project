@@ -31,7 +31,7 @@ class BlogModel(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICE, default='draft')
     objects = models.Manager()
     published = PublishedManager()
-    image = models.ImageField()
+    image = models.ImageField(upload_to='images/', blank=True)
 
     class Meta:
         ordering = ('-publish',)
