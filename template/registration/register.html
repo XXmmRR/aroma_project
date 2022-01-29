@@ -1,4 +1,5 @@
 {% load static %}
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +25,7 @@
     <div class="main_menu">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-          <a class="navbar-brand logo_h" href="index.html"><img src="img/logo.png" alt=""></a>
+          <a class="navbar-brand logo_h" href="{% url 'login' %}"><img src="img/logo.png" alt=""></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="icon-bar"></span>
@@ -33,7 +34,7 @@
           </button>
           <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
             <ul class="nav navbar-nav menu_nav ml-auto mr-auto">
-              <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Home</a></li>
               <li class="nav-item submenu dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                   aria-expanded="false">Shop</a>
@@ -57,12 +58,12 @@
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                   aria-expanded="false">Pages</a>
                 <ul class="dropdown-menu">
-									<li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
-                  <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>									
+									<li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+                  <li class="nav-item"><a class="nav-link" href="{% url 'signup' %}">Register</a></li>
                   <li class="nav-item"><a class="nav-link" href="tracking-order.html">Tracking</a></li>
                 </ul>
               </li>
-              <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
             </ul>
 
             <ul class="nav-shop">
@@ -104,32 +105,18 @@
 						<div class="hover">
 							<h4>Already have an account?</h4>
 							<p>There are advances being made in science and technology everyday, and a good example of this is the</p>
-							<a class="button button-account" href="login.html">Login Now</a>
+							<a class="button button-account" href="{% url 'login' %}">Login Now</a>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-6">
 					<div class="login_form_inner register_form_inner">
 						<h3>Create an account</h3>
-						<form class="row login_form" action="#/" id="register_form" >
+						<form class="row login_form" method="post" id="contactForm" >{% csrf_token %}
 							<div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="name" name="name" placeholder="Username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'">
+								{{ form|crispy }}
 							</div>
-							<div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="email" name="email" placeholder="Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address'">
-              </div>
-              <div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="password" name="password" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
-              </div>
-              <div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Confirm Password'">
-							</div>
-							<div class="col-md-12 form-group">
-								<div class="creat_account">
-									<input type="checkbox" id="f-option2" name="selector">
-									<label for="f-option2">Keep me logged in</label>
-								</div>
-							</div>
+							<div class="col-md-12 form-group"></div>
 							<div class="col-md-12 form-group">
 								<button type="submit" value="submit" class="button button-register w-100">Register</button>
 							</div>

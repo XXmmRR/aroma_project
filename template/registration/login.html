@@ -59,11 +59,11 @@
                   aria-expanded="false">Pages</a>
                 <ul class="dropdown-menu">
                   <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
-                  <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>
+                  <li class="nav-item"><a class="nav-link" href="{% url 'signup' %}">Register</a></li>
                   <li class="nav-item"><a class="nav-link" href="tracking-order.html">Tracking</a></li>
                 </ul>
               </li>
-              <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
             </ul>
 
             <ul class="nav-shop">
@@ -105,7 +105,7 @@
 						<div class="hover">
 							<h4>New to our website?</h4>
 							<p>There are advances being made in science and technology everyday, and a good example of this is the</p>
-							<a class="button button-account" href="register.html">Create an Account</a>
+							<a class="button button-account" href="{% url 'signup' %}">Create an Account</a>
 						</div>
 					</div>
 				</div>
