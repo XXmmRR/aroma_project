@@ -155,15 +155,13 @@
                       <article class="row blog_item">
                           <div class="col-md-3">
                               <div class="blog_info text-right">
+                                  {% for article in object_list %}
                                   <div class="post_tag">
-                                      <a href="#">Food,</a>
-                                      <a class="active" href="#">Technology,</a>
-                                      <a href="#">Politics,</a>
-                                      <a href="#">Lifestyle</a>
+                                      <a href="#">{{ article.tags.all }},</a>
                                   </div>
                                   <ul class="blog_meta list">
                                       <li>
-                                          <a href="#">Mark wiens
+                                          <a href="#">{{ article.author }}
                                               <i class="lnr lnr-user"></i>
                                           </a>
                                       </li>
@@ -185,10 +183,9 @@
                                   </ul>
                               </div>
                           </div>
-                          {% for article in object_list %}
                           <div class="col-md-9">
                               <div class="blog_post">
-                                  <img src='{{ article.image }}' alt="">
+                                  <img src='{{ article.image.url }}' alt="">
                                   <div class="blog_details">
                                       <a href="single-blog.html">
                                           <h2>{{ article.title }}</h2>
