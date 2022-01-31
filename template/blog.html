@@ -155,18 +155,20 @@
                       <article class="row blog_item">
                           <div class="col-md-3">
                               <div class="blog_info text-right">
-                                  {% for article in object_list %}
+                                  {% for post in posts %}
                                   <div class="post_tag">
-                                      <a href="#">{{ article.tags.all }},</a>
+                                      {% for tag in post.tags.all %}
+                                      <a href="{% url 'post_by_tag' tag.slug %}">{{tag.name}}</a>
+                                      {% endfor %}
                                   </div>
                                   <ul class="blog_meta list">
                                       <li>
-                                          <a href="#">{{ article.author }}
+                                          <a href="#">{{ post.author }}
                                               <i class="lnr lnr-user"></i>
                                           </a>
                                       </li>
                                       <li>
-                                          <a href="#">12 Dec, 2017
+                                          <a href="#"> {{ post.publish }}
                                               <i class="lnr lnr-calendar-full"></i>
                                           </a>
                                       </li>
@@ -185,153 +187,17 @@
                           </div>
                           <div class="col-md-9">
                               <div class="blog_post">
-                                  <img src='{{ article.image.url }}' alt="">
+                                  <img src='{{ post.image.url }}' alt="">
                                   <div class="blog_details">
                                       <a href="single-blog.html">
-                                          <h2>{{ article.title }}</h2>
+                                          <h2>{{ post.title }}</h2>
                                       </a>
-                                      <p>{{ article.body }}</p>
+                                      <p>{{ post.body }}</p>
                                       <a class="button button-blog" href="single-blog.html">View More</a>
                                   </div>
                               </div>
                           </div>
                           {% endfor %}
-                      </article>
-                      <article class="row blog_item">
-                          <div class="col-md-3">
-                              <div class="blog_info text-right">
-                                  <div class="post_tag">
-                                      <a href="#">Food,</a>
-                                      <a class="active" href="#">Technology,</a>
-                                      <a href="#">Politics,</a>
-                                      <a href="#">Lifestyle</a>
-                                  </div>
-                                  <ul class="blog_meta list">
-                                      <li>
-                                          <a href="#">Mark wiens
-                                              <i class="lnr lnr-user"></i>
-                                          </a>
-                                      </li>
-                                      <li>
-                                          <a href="#">12 Dec, 2017
-                                              <i class="lnr lnr-calendar-full"></i>
-                                          </a>
-                                      </li>
-                                      <li>
-                                          <a href="#">1.2M Views
-                                              <i class="lnr lnr-eye"></i>
-                                          </a>
-                                      </li>
-                                      <li>
-                                          <a href="#">06 Comments
-                                              <i class="lnr lnr-bubble"></i>
-                                          </a>
-                                      </li>
-                                  </ul>
-                              </div>
-                          </div>
-                      </article>
-                      <article class="row blog_item">
-                          <div class="col-md-3">
-                              <div class="blog_info text-right">
-                                  <div class="post_tag">
-                                      <a href="#">Food,</a>
-                                      <a class="active" href="#">Technology,</a>
-                                      <a href="#">Politics,</a>
-                                      <a href="#">Lifestyle</a>
-                                  </div>
-                                  <ul class="blog_meta list">
-                                      <li>
-                                          <a href="#">Mark wiens
-                                              <i class="lnr lnr-user"></i>
-                                          </a>
-                                      </li>
-                                      <li>
-                                          <a href="#">12 Dec, 2017
-                                              <i class="lnr lnr-calendar-full"></i>
-                                          </a>
-                                      </li>
-                                      <li>
-                                          <a href="#">1.2M Views
-                                              <i class="lnr lnr-eye"></i>
-                                          </a>
-                                      </li>
-                                      <li>
-                                          <a href="#">06 Comments
-                                              <i class="lnr lnr-bubble"></i>
-                                          </a>
-                                      </li>
-                                  </ul>
-                              </div>
-                          </div>
-                      </article>
-                      <article class="row blog_item">
-                          <div class="col-md-3">
-                              <div class="blog_info text-right">
-                                  <div class="post_tag">
-                                      <a href="#">Food,</a>
-                                      <a class="active" href="#">Technology,</a>
-                                      <a href="#">Politics,</a>
-                                      <a href="#">Lifestyle</a>
-                                  </div>
-                                  <ul class="blog_meta list">
-                                      <li>
-                                          <a href="#">Mark wiens
-                                              <i class="lnr lnr-user"></i>
-                                          </a>
-                                      </li>
-                                      <li>
-                                          <a href="#">12 Dec, 2017
-                                              <i class="lnr lnr-calendar-full"></i>
-                                          </a>
-                                      </li>
-                                      <li>
-                                          <a href="#">1.2M Views
-                                              <i class="lnr lnr-eye"></i>
-                                          </a>
-                                      </li>
-                                      <li>
-                                          <a href="#">06 Comments
-                                              <i class="lnr lnr-bubble"></i>
-                                          </a>
-                                      </li>
-                                  </ul>
-                              </div>
-                          </div>
-                      </article>
-                      <article class="row blog_item">
-                          <div class="col-md-3">
-                              <div class="blog_info text-right">
-                                  <div class="post_tag">
-                                      <a href="#">Food,</a>
-                                      <a class="active" href="#">Technology,</a>
-                                      <a href="#">Politics,</a>
-                                      <a href="#">Lifestyle</a>
-                                  </div>
-                                  <ul class="blog_meta list">
-                                      <li>
-                                          <a href="#">Mark wiens
-                                              <i class="lnr lnr-user"></i>
-                                          </a>
-                                      </li>
-                                      <li>
-                                          <a href="#">12 Dec, 2017
-                                              <i class="lnr lnr-calendar-full"></i>
-                                          </a>
-                                      </li>
-                                      <li>
-                                          <a href="#">1.2M Views
-                                              <i class="lnr lnr-eye"></i>
-                                          </a>
-                                      </li>
-                                      <li>
-                                          <a href="#">06 Comments
-                                              <i class="lnr lnr-bubble"></i>
-                                          </a>
-                                      </li>
-                                  </ul>
-                              </div>
-                          </div>
                       </article>
                       <nav class="blog-pagination justify-content-center d-flex">
                           <ul class="pagination">
