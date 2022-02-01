@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.db.models import Q
 from .models import BlogModel
 from django.views.generic import ListView, DetailView
 from taggit.models import Tag
@@ -15,6 +15,18 @@ class BlogDetailView(DetailView):
     model = BlogModel
     template_name = 'blog-detail.html'
     context_object_name = 'post'
+
+
+class SearchResultsListView(ListView):
+    model = BlogModel
+    context_object_name = 'posts'
+    template_name = 'blog.html'
+
+    def get_queryset(self):  # new
+        query = self.request.GET.get('q')
+        return BlogModel.objects.filter(
+            Q(title__icontains=query)
+        )
 
 
 class TagIndexView(ListView):

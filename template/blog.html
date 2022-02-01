@@ -239,7 +239,9 @@
                   <div class="blog_right_sidebar">
                       <aside class="single_sidebar_widget search_widget">
                           <div class="input-group">
-                              <input type="text" class="form-control" placeholder="Search Posts">
+                               <form class="form-inline mt-2 mt-md-0" action="{% url 'search_results' %}" method="get">
+                              <input type="text" class="form-control" placeholder="Search Posts" name="q">
+                                   </form>
                               <span class="input-group-btn">
                                   <button class="btn btn-default" type="button">
                                       <i class="lnr lnr-magnifier"></i>
