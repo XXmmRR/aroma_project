@@ -193,7 +193,7 @@
                                       <a href="single-blog.html">
                                           <h2>{{ post.title }}</h2>
                                       </a>
-                                      <p>{{ post.body|markdown|truncatewords_html:30 }}</p>
+                                      <p>{{ post.body|truncatewords_html:30 }}</p>
                                       <a class="button button-blog" href="{% url 'post_detail' post.publish.year post.publish.month post.publish.day post.slug %}">View More</a>
                                   </div>
                               </div>

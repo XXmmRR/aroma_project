@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'accounts',
     'taggit',
     'blog',
+    'ckeditor',
+
 ]
 
 MIDDLEWARE = [
