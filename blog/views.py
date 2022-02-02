@@ -7,6 +7,7 @@ from taggit.models import Tag
 class BlogListView(ListView):
     model = BlogModel
     template_name = 'blog.html'
+    paginate_by = 3
     queryset = BlogModel.objects.all()
     context_object_name = 'posts'
 
