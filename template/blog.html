@@ -188,12 +188,12 @@
                           </div>
                           <div class="col-md-9">
                               <div class="blog_post">
-                                  <img src='{{ post.image.url }}' alt="">
+                                  <img src='{{ post.image.url }}' alt="" width="750" height="350">
                                   <div class="{{post.get_absolute.url}}">
-                                      <a href="single-blog.html">
+                                      <a href="{% url 'post_detail' post.publish.year post.publish.month post.publish.day post.slug %}">
                                           <h2>{{ post.title }}</h2>
                                       </a>
-                                      <p>{{ post.body|truncatewords_html:30 }}</p>
+                                      <p>{{ post.about }}</p>
                                       <a class="button button-blog" href="{% url 'post_detail' post.publish.year post.publish.month post.publish.day post.slug %}">View More</a>
                                   </div>
                               </div>
@@ -283,7 +283,7 @@
                           {% get_most_commented_posts as most_commented_posts %}
                           {% for post in most_commented_posts %}
                           <div class="media post_item">
-                              <img src="{{post.image.url}}" alt="post">
+                              <img src="{{post.image.url}}" alt="post" width="100", height="60">
                               <div class="media-body">
                                   <a href="single-blog.html">
                                       <h3>{{ post.title }}</h3>
