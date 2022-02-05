@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import BlogModel
+from .models import BlogModel, Comment
 
 # Register your models here.
 
@@ -13,3 +13,6 @@ class PostAdmin(admin.ModelAdmin):
     raw_id_fields = ('author',)
     date_hierarchy = 'publish'
     ordering = ('status', 'publish')
+
+
+admin.site.register(Comment)
