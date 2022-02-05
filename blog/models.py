@@ -24,6 +24,7 @@ class BlogModel(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE,
                                related_name='blog_posts')
     body = RichTextField(blank=True, null=True)
+    about = models.TextField(max_length=50, blank=True)
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

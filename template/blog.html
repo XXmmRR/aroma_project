@@ -105,7 +105,7 @@
                 <img class="card-img rounded-0" src="{% static 'img/blog/cat-post/cat-post-3.jpg' %}" alt="post">
                 <div class="categories_details">
                     <div class="categories_text">
-                        <a href="single-blog.html">
+                        <a href="/blog/tags/social-life/">
                             <h5>Social Life</h5>
                         </a>
                         <div class="border_line"></div>
@@ -119,7 +119,7 @@
             <img class="card-img rounded-0" src="{% static 'img/blog/cat-post/cat-post-2.jpg' %}" alt="post">
             <div class="categories_details">
               <div class="categories_text">
-                <a href="single-blog.html">
+                <a href="/blog/tags/politic/">
                     <h5>Politics</h5>
                 </a>
                 <div class="border_line"></div>
@@ -133,7 +133,7 @@
                 <img class="card-img rounded-0" src="{% static 'img/blog/cat-post/cat-post-1.jpg' %}" alt="post">
                 <div class="categories_details">
                     <div class="categories_text">
-                        <a href="single-blog.html">
+                        <a href="/blog/tags/food/">
                             <h5>Food</h5>
                         </a>
                         <div class="border_line"></div>
@@ -285,7 +285,7 @@
                           <div class="media post_item">
                               <img src="{{post.image.url}}" alt="post" width="100", height="60">
                               <div class="media-body">
-                                  <a href="single-blog.html">
+                                  <a href="{{post.get_absolute_url}}">
                                       <h3>{{ post.title }}</h3>
                                   </a>
                                   <p>{{post.created}}</p>
