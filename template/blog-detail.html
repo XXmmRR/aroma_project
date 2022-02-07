@@ -129,12 +129,12 @@
 																			</a>
 																	</li>
 																	<li>
-																			<a href="#">1.2M Views
+																			<a href="#">{{post.total_views}}
 																					<i class="lnr lnr-eye"></i>
 																			</a>
 																	</li>
 																	<li>
-																			<a href="#">06 Comments
+																			<a href="#">{{post.num_comments}}
 																					<i class="lnr lnr-bubble"></i>
 																			</a>
 																	</li>
@@ -215,7 +215,7 @@
 											</div>
 									</div>
 									<div class="comments-area">
-											<h4>05 Comments</h4>
+											<h4>{{post.num_comments}} Comments</h4>
 											<div class="comment-list">
 												{% for comment in post.comments.all %}
 													<div class="single-comment justify-content-between d-flex">
