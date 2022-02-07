@@ -13,6 +13,13 @@ class PublishedManager(models.Manager):
         return super().get_queryset().filter(status='published')
 
 
+class IpModel(models.Model):
+    ip = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.ip
+
+
 class BlogModel(models.Model):
     tags = TaggableManager()
     STATUS_CHOICE = (
@@ -23,6 +30,7 @@ class BlogModel(models.Model):
     slug = models.SlugField(max_length=250, unique_for_date='publish')
     author = models.ForeignKey(User, on_delete=models.CASCADE,
                                related_name='blog_posts')
+    views = models.ManyToManyField(IpModel, related_name='post_views', blank=True)
     body = RichTextField(blank=True, null=True)
     about = models.TextField(max_length=50, blank=True)
     publish = models.DateTimeField(default=timezone.now)
