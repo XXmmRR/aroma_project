@@ -180,7 +180,7 @@
 													<div class="single-comment justify-content-between d-flex">
 															<div class="user justify-content-between d-flex">
 																	<div class="thumb">
-																			<img src="{% static 'img/blog/c1.jpg' %}" alt="">
+																			<img src="{% static 'img/blog/noavatar.png' %}" alt="">
 																	</div>
 																	<div class="desc">
 																			<h5>
@@ -192,33 +192,14 @@
 																			</p>
 																	</div>
 															</div>
-															<div class="reply-btn">
-																	<a href="#" class="btn-reply text-uppercase">reply</a>
-															</div>
 													</div>
 													{% endfor %}
 											</div>
 									</div>
 									<div class="comment-form">
 											<h4>Leave a Reply</h4>
-											<form>
-													<div class="form-group form-inline">
-															<div class="form-group col-lg-6 col-md-6 name">
-																	<input type="text" class="form-control" id="name" placeholder="Enter Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">
-															</div>
-															<div class="form-group col-lg-6 col-md-6 email">
-																	<input type="email" class="form-control" id="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
-															</div>
-													</div>
-													<div class="form-group">
-															<input type="text" class="form-control" id="subject" placeholder="Subject" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Subject'">
-													</div>
-													<div class="form-group">
-															<textarea class="form-control mb-10" rows="5" name="message" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'"
-																	required=""></textarea>
-													</div>
-													<a href="#" class="button button-postComment button--active">Post Comment</a>
-											</form>
+											        {% csrf_token %}
+        											<form class="form-group form-inline">{{ form.as_p }}</form>
 									</div>
 							</div>
 							<div class="col-lg-4">
@@ -271,9 +252,11 @@
                           <div class="media post_item">
                               <img src="{{post.image.url}}" alt="post" width="100", height="60">
                               <div class="media-body">
-                                  <a href="single-blog.html">
-                                      <h3>{{ post.title }}</h3>
-                                  </a>
+                                  <form action="{% url 'post_detail' post.id post.slug %}" method="get">
+                                          <input type="hidden" name="post_id" value="{{post.id}}">
+                                          <input type="hidden" name="post_slug" value="{{post.slug}}">
+                                          <button class="button button-blog" type="submit" ><h3>{{post.title}}</h3> </button>
+                                          </form>
                                   <p>{{post.created}}</p>
                               </div>
                           </div>

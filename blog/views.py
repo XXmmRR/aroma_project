@@ -1,8 +1,9 @@
 from django.db.models import Q
 from .models import BlogModel, Comment, IpModel
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 from taggit.models import Tag
 from django.db.models import Count
+from .forms import CommentForm
 
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
@@ -32,6 +33,7 @@ class BlogDetailView(TagMixin, DetailView):
     model = BlogModel
     queryset = BlogModel.objects.annotate(num_comments=Count('comments')).all()
     template_name = 'blog-detail.html'
+    extra_context = {'form': CommentForm}
     context_object_name = 'post'
 
     def get(self, request, *args, **kwargs):
