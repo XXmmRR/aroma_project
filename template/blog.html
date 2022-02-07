@@ -174,7 +174,7 @@
                                           </a>
                                       </li>
                                       <li>
-                                          <a href="#">1.2M Views
+                                          <a href="#">{{post.total_views}} Views
                                               <i class="lnr lnr-eye"></i>
                                           </a>
                                       </li>
@@ -190,11 +190,15 @@
                               <div class="blog_post">
                                   <img src='{{ post.image.url }}' alt="" width="750" height="350">
                                   <div class="{{post.get_absolute.url}}">
-                                      <a href="{% url 'post_detail' post.publish.year post.publish.month post.publish.day post.slug %}">
+                                      <a href="{% url 'post_detail' post.id post.slug%}">
                                           <h2>{{ post.title }}</h2>
                                       </a>
                                       <p>{{ post.about }}</p>
-                                      <a class="button button-blog" href="{% url 'post_detail' post.publish.year post.publish.month post.publish.day post.slug %}">View More</a>
+                                      <form action="{% url 'post_detail' post.id post.slug %}" method="get">
+                                          <input type="hidden" name="post_id" value="{{post.id}}">
+                                          <input type="hidden" name="post_slug" value="{{post.slug}}">
+                                          <button type="submit">View More</button>
+                                          </form>
                                   </div>
                               </div>
                           </div>

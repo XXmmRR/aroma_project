@@ -1,9 +1,16 @@
 from django.db.models import Q
-from .models import BlogModel, Comment
+from .models import BlogModel, Comment, IpModel
 from django.views.generic import ListView, DetailView
 from taggit.models import Tag
 from django.db.models import Count
 
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
 
 class TagMixin(object):
     def get_context_data(self, **kwargs):
@@ -25,6 +32,23 @@ class BlogDetailView(TagMixin, DetailView):
     queryset = BlogModel.objects.annotate(num_comments=Count('comments')).all()
     template_name = 'blog-detail.html'
     context_object_name = 'post'
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        context = self.get_context_data(object=self.object)
+        ip = get_client_ip(self.request)
+        print(ip)
+        if IpModel.objects.filter(ip=ip):
+            print('Ip already present')
+            post_id = request.GET.get('post_id')
+            post = BlogModel.objects.get(id=post_id)
+            post.views.add(IpModel.objects.get(ip=ip))
+        else:
+            IpModel.objects.create(ip=ip)
+            post_id = request.GET.get('post_id')
+            post = BlogModel.objects(id=post_id)
+            post.views.add(IpModel.get(ip=ip))
+        return self.render_to_response(context)
 
 
 class SearchResultsListView(TagMixin, ListView):
@@ -48,3 +72,4 @@ class TagIndexView(TagMixin, ListView):
     def get_queryset(self):
         queryset = BlogModel.objects.annotate(num_comments=Count('comments')).all()
         return queryset.filter(tags__slug=self.kwargs.get('tag_slug'))
+

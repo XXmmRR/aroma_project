@@ -45,13 +45,14 @@ class BlogModel(models.Model):
         ordering = ('-publish',)
 
     def get_absolute_url(self):
-        return reverse('post_detail', args=[self.publish.year,
-                                            self.publish.month,
-                                            self.publish.day,
+        return reverse('post_detail', args=[self.id,
                                             self.slug])
 
     def __str__(self):
         return self.title
+
+    def total_views(self):
+        return self.views.count()
 
 
 class Comment(models.Model):
