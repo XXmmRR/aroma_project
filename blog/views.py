@@ -1,9 +1,11 @@
 from django.db.models import Q
 from .models import BlogModel, Comment, IpModel
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, View
 from taggit.models import Tag
 from django.db.models import Count
 from .forms import CommentForm
+from django.shortcuts import redirect
+
 
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
@@ -76,3 +78,13 @@ class TagIndexView(TagMixin, ListView):
         queryset = BlogModel.objects.annotate(num_comments=Count('comments')).all()
         return queryset.filter(tags__slug=self.kwargs.get('tag_slug'))
 
+
+class AddReview(View):
+
+    def post(self, request, pk):
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.post_id = pk
+            form.save()
+        return redirect('/blog/')

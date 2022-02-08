@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from .views import BlogListView, TagIndexView, BlogDetailView, SearchResultsListView
+from .views import BlogListView, TagIndexView, BlogDetailView, SearchResultsListView, AddReview
 
 urlpatterns = [
     path('', BlogListView.as_view(), name='blog_list'),
@@ -8,4 +8,5 @@ urlpatterns = [
     path('post/<int:pk>/<slug:slug>/',
          BlogDetailView.as_view(), name='post_detail'),
     path('search/', SearchResultsListView.as_view(), name='search_results'),
+    path('review/<int:pk>', AddReview.as_view(), name='add_review')
     ]
