@@ -3,5 +3,14 @@ from .models import Category, Product
 
 # Register your models here.
 
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('title', 'slug', 'publish', 'Description')
+    list_filter = ('creatsed', 'publish', 'Description')
+    search_fields = ('title', 'Description')
+    prepopulated_fields = {'slug': ('title',)}
+    date_hierarchy = 'publish'
+    ordering = ('publish',)
+
+
 admin.site.register(Category)
-admin.site.register(Product)
