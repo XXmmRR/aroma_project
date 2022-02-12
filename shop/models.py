@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils import timezone
+from django.urls import reverse
+
 
 # Create your models here.
 
@@ -25,3 +27,8 @@ class Product(models.Model):
     image = models.ImageField(upload_to='images/shop', blank=True)
     objects = models.Manager()
 
+    def get_absolute_url(self):
+        return reverse('single_shop', args=[self.id])
+
+    def __str__(self):
+        return self.title
