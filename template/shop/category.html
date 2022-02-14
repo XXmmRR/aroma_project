@@ -108,7 +108,7 @@
                 <form action="#">
                   <ul>
                       {% for category in categories.all %}
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="men" name="brand"><label for="men"><span> {{ category.name }}</span></label></li>
+                    <li class="filter-list"><input class="pixel-radio" type="radio" id="men" name="brand"><label for="men"><span> <a href="{% url 'shop_category' category.slug %}">{{ category.name }}</a></span></label></li>
                       {% endfor %}
                   </ul>
                 </form>
@@ -160,7 +160,7 @@
                   </div>
                   <div class="card-body">
                     <p>{{product.category}}</p>
-                    <h4 class="card-product__title"><a href="#">{{product.title}}</a></h4>
+                    <h4 class="card-product__title"><a href="{% url 'single_shop' product.id product.slug%}">{{product.title}}</a></h4>
                     <p class="card-product__price">${{product.price}}</p>
                   </div>
                 </div>
@@ -169,6 +169,39 @@
               </div>
             </div>
           </section>
+            <nav class="blog-pagination justify-content-center d-flex">
+                          <ul class="pagination">
+                              <li class="page-item">
+                                  {% if page_obj.has_previous %}
+                                  <a href="?page={{ page_obj.previous_page_number }}" class="page-link" aria-label="Previous">
+                                      <span aria-hidden="true">
+                                          <span class="lnr lnr-chevron-left"></span>
+                                      </span>
+                                  </a>
+                              </li>
+                              {% endif %}
+                              {% for p in paginator.page_range %}
+                              {% if page_obj.number == p %}
+                              <li class="page-item active">
+                                  <a href="?page={{ p }}" class="page-link">{{ p }}</a>
+                              <li class="page-item active">
+                              {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}
+                              <li class="page-item">
+                                  <a href="?page={{ p }}" class="page-link">{{ p }}</a>
+                              {% endif %}
+                              {% endfor %}
+                              <li class="page-item">
+
+                              {% if page_obj.has_next %}
+                                  <a href="?page={{ page_obj.next_page_number }}" class="page-link" aria-label="Next">
+                                      <span aria-hidden="true">
+                                          <span class="lnr lnr-chevron-right"></span>
+                                      </span>
+                                  </a>
+                              </li>
+                              {% endif %}
+                          </ul>
+                      </nav>
           <!-- End Best Seller -->
         </div>
       </div>

@@ -7,7 +7,8 @@ from django.urls import reverse
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=64)
+    name = models.CharField(max_length=64, unique=True)
+    slug = models.SlugField(max_length=64, unique=True, null=True)
 
     def __str__(self):
         return self.name
@@ -28,7 +29,8 @@ class Product(models.Model):
     objects = models.Manager()
 
     def get_absolute_url(self):
-        return reverse('single_shop', args=[self.id])
+        return reverse('single_shop', args=[self.id,
+                                            self.slug])
 
     def __str__(self):
         return self.title
