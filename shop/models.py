@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.urls import reverse
-
+from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your models here.
 
@@ -36,3 +36,20 @@ class Product(models.Model):
         return self.title
 
 
+class Comment(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='comment')
+    parent = models.ForeignKey('self' , null=True , blank=True , on_delete=models.CASCADE , related_name='replies')
+    name = models.CharField(max_length=50)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    email = models.EmailField()
+    phone = PhoneNumberField(null=False, blank=False, unique=True)
+    body = models.TextField(max_length=400)
+    avatar = models.ImageField(upload_to='images/shop/comments', blank=True)
+
+    class Meta:
+        # sort comments in chronological order by default
+        ordering = ('created',)
+
+    def __str__(self):
+        return 'Comment by {}'.format(self.name)
