@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Product
+from .models import Category, Product, Comment
 
 # Register your models here.
 
@@ -12,5 +12,5 @@ class ProductAdmin(admin.ModelAdmin):
     date_hierarchy = 'publish'
     ordering = ('publish',)
 
-
+admin.site.register(Comment)
 admin.site.register(Category)

@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-gzxj!&df%-cubbq!-npjb09hc=j34@)khx^k@zf05=r#d2o(xf
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', '192.168.0.100']
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1']
 
 
 # Application definition
@@ -43,8 +43,7 @@ INSTALLED_APPS = [
     'blog',
     'ckeditor',
     'shop',
-    'phonenumber_field',
-
+    'phonenumber_field'
 ]
 
 MIDDLEWARE = [

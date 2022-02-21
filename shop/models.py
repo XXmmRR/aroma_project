@@ -37,7 +37,7 @@ class Product(models.Model):
 
 
 class Comment(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='comment')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='comments')
     parent = models.ForeignKey('self' , null=True , blank=True , on_delete=models.CASCADE , related_name='replies')
     name = models.CharField(max_length=50)
     created = models.DateTimeField(auto_now_add=True)
