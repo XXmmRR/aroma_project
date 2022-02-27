@@ -21,6 +21,6 @@ marshmallow==3.14.1
 psycopg2-binary==2.8.5
 python-dotenv==0.19.2
 sqlparse==0.4.2
-whitenoise==5.3.0
+whitenoise==3
 environs[django]
 django-heroku
