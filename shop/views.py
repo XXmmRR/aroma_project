@@ -30,7 +30,7 @@ class ShopSearchResultsListView(ListView):
     model = Product
     context_object_name = 'products'
     template_name = 'shop/category.html'
-    paginate_by = 12
+    paginate_by = 3
 
     def get_queryset(self):  # new
         query = self.request.GET.get('q')

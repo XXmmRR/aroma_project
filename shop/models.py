@@ -23,6 +23,7 @@ class Product(models.Model):
     Count = models.DecimalField(max_digits=6, decimal_places=2)
     Description = models.TextField(max_length=500)
     Character = models.TextField(max_length=500)
+    Specification = models.TextField(max_length=250)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     image = models.ImageField(upload_to='images/shop', blank=True)
