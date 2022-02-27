@@ -110,6 +110,11 @@
                       {% for category in categories.all %}
                     <li class="filter-list"><input class="pixel-radio" type="radio" id="men" name="brand"><label for="men"><span> <a href="{% url 'shop_category' category.slug %}">{{ category.name }}</a></span></label></li>
                       {% endfor %}
+                      <label for="viewCountMin">Minimum price</label>
+                      <input type="number" min=0 class="form-control" id="viewCountMin" placeholder="0" name="view_count_min">
+                      <label for="viewCountMax">Maximum price</label>
+                      <input type="number" min=0 class="form-control" id="viewCountMax" placeholder="10000?" name="view_count_max">
+                      <button type="submit" class="btn btn-primary">Search</button>
                   </ul>
                 </form>
               </li>

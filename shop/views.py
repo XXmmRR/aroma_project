@@ -11,6 +11,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 
+def is_valid_queryparam(param):
+    return param != '' and param is not None
+
+
 @login_required
 def LikeView(request, pk):
     post = get_object_or_404(Product, id=request.POST.get('product_id'))
@@ -24,6 +28,20 @@ class ShopView(LoginRequiredMixin, ListView):
     paginate_by = 12
     extra_context = {'categories': Category.objects.all()}
     context_object_name = 'products'
+
+    def get_queryset(self):
+        view_count_min = self.request.GET.get('view_count_min')
+        view_count_max = self.request.GET.get('view_count_max')
+
+        queryset = Product.objects.all()
+
+        if is_valid_queryparam(view_count_min):
+            queryset = queryset.filter(price__gte=view_count_min)
+
+        if is_valid_queryparam(view_count_max):
+            queryset = queryset.filter(price__lt=view_count_max)
+
+        return queryset
 
 
 @login_required
@@ -51,10 +69,11 @@ class ShopSearchResultsListView(LoginRequiredMixin, ListView):
 
 
 class ShopDetailView(LoginRequiredMixin, DetailView):
-    model = Product
     template_name = 'shop/single-product.html'
     context_object_name = 'product'
     extra_context = {'comments': Comment}
+
+    model = Product
 
     def get_context_data(self, *args, **kwargs):
         context = super(ShopDetailView, self).get_context_data()
