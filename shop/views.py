@@ -10,7 +10,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
-@login_required()
+
+@login_required
 def LikeView(request, pk):
     post = get_object_or_404(Product, id=request.POST.get('product_id'))
     post.likes.add(request.user)
@@ -24,7 +25,8 @@ class ShopView(ListView, LoginRequiredMixin):
     extra_context = {'categories': Category.objects.all()}
     context_object_name = 'products'
 
-@login_required()
+
+@login_required
 def shop_category(request, slug):
     posts = Product.objects.filter(category__slug=slug)
     paginator = Paginator(posts, 12)  # Show 25 contacts per page.
