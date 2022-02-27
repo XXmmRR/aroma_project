@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import ListView, DetailView, View
+from django.views.generic import ListView, DetailView
 from .models import Product, Category, Comment, Review
 from django.db.models import Q
 from django.core.paginator import Paginator
@@ -7,8 +7,9 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import RateForm
-from django.http import HttpResponseRedirect
-from django.db.models import Count
+from cart.cart import Cart
+from django.http import HttpResponseRedirect, HttpResponse
+from cart.context_processor import cart_total_amount
 
 # Create your views here.
 
@@ -97,3 +98,51 @@ class ShopDetailView(LoginRequiredMixin, DetailView):
         context['total_likes'] = stuff.total_likes()
 
         return context
+
+
+@login_required
+def cart_add(request, id):
+    cart = Cart(request)
+    product = Product.objects.get(id=id)
+    cart.add(product=product)
+    return redirect("home")
+
+
+@login_required
+def item_clear(request, id):
+    cart = Cart(request)
+    product = Product.objects.get(id=id)
+    cart.remove(product)
+    return redirect("cart_detail")
+
+
+@login_required
+def item_increment(request, id):
+    cart = Cart(request)
+    product = Product.objects.get(id=id)
+    cart.add(product=product)
+    return redirect("cart_detail")
+
+
+@login_required
+def item_decrement(request, id):
+    cart = Cart(request)
+    product = Product.objects.get(id=id)
+    cart.decrement(product=product)
+    return redirect("cart_detail")
+
+
+@login_required
+def cart_clear(request):
+    cart = Cart(request)
+    cart.clear()
+    return redirect("cart_detail")
+
+
+@login_required
+def cart_detail(request):
+    return render(request, 'cart/cart_detail.html')
+
+@login_required
+def payment(request):
+    return HttpResponse("Вы провели оплату")

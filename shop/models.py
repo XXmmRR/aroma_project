@@ -17,7 +17,7 @@ class Category(models.Model):
 
 class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='product_type')
-    title = models.CharField(max_length=50)
+    name = models.CharField(max_length=50)
     slug = models.SlugField(max_length=250, unique_for_date='publish')
     publish = models.DateTimeField(default=timezone.now)
     price = models.DecimalField(max_digits=6, decimal_places=2)
@@ -29,7 +29,7 @@ class Product(models.Model):
     updated = models.DateTimeField(auto_now=True)
     image = models.ImageField(upload_to='images/shop', blank=True)
     objects = models.Manager()
-    likes = models.ManyToManyField(User, related_name='product_likes')
+    likes = models.ManyToManyField(User, related_name='product_likes', blank=True)
 
     def total_likes(self):
         return self.likes.count()
@@ -39,7 +39,7 @@ class Product(models.Model):
                                             self.slug])
 
     def __str__(self):
-        return self.title
+        return self.name
 
 
 class Comment(models.Model):

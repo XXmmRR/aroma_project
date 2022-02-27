@@ -6,10 +6,10 @@ from .models import Category, Product, Comment, Review
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('title', 'slug', 'publish', 'Description')
+    list_display = ('name', 'slug', 'publish', 'Description')
     list_filter = ('created', 'publish', 'Description')
-    search_fields = ('title', 'Description')
-    prepopulated_fields = {'slug': ('title',)}
+    search_fields = ('name', 'Description')
+    prepopulated_fields = {'slug': ('name',)}
     date_hierarchy = 'publish'
     ordering = ('publish',)
 

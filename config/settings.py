@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'blog',
     'ckeditor',
     'shop',
-    'phonenumber_field'
+    'phonenumber_field',
+    'cart'
 ]
 
 MIDDLEWARE = [
@@ -139,3 +140,5 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = str(BASE_DIR.joinpath('media'))
 
 CRISPY_TEMPLATE_PACK = 'uni_form'
+
+CART_SESSION_ID = 'cart'
