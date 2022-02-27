@@ -68,7 +68,7 @@ class ShopSearchResultsListView(LoginRequiredMixin, ListView):
     def get_queryset(self):  # new
         query = self.request.GET.get('q')
         return Product.objects.filter(
-            Q(title__icontains=query)
+            Q(name__icontains=query)
         )
 
 
