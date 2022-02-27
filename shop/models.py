@@ -59,3 +59,27 @@ class Comment(models.Model):
 
     def __str__(self):
         return 'Comment by {}'.format(self.name)
+
+
+RATE_CHOICES = [
+    (1, '1 - Trash'),
+    (2, '2 - Almost trash'),
+    (3, '3 - Usable'),
+    (4, '4 - Good'),
+    (5, '5 - Excellent'),
+]
+
+
+class Review(models.Model):
+    post = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
+    name = models.CharField(max_length=80)
+    email = models.EmailField()
+    body = models.TextField()
+    rate = models.PositiveSmallIntegerField(choices=RATE_CHOICES, null=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+    def total_reviews(self):
+        return self.rate.count()

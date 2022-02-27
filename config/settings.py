@@ -137,3 +137,5 @@ LOGOUT_REDIRECT_URL = 'home'
 # Media
 MEDIA_URL = '/media/'
 MEDIA_ROOT = str(BASE_DIR.joinpath('media'))
+
+CRISPY_TEMPLATE_PACK = 'uni_form'

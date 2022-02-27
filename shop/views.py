@@ -1,18 +1,21 @@
-from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView, DetailView
-from .models import Product, Category, Comment
+from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic import ListView, DetailView, View
+from .models import Product, Category, Comment, Review
 from django.db.models import Q
 from django.core.paginator import Paginator
-from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import RateForm
+from django.http import HttpResponseRedirect
+from django.db.models import Count
 
 # Create your views here.
 
 
 def is_valid_queryparam(param):
     return param != '' and param is not None
+
 
 
 @login_required
@@ -59,7 +62,7 @@ class ShopSearchResultsListView(LoginRequiredMixin, ListView):
     model = Product
     context_object_name = 'products'
     template_name = 'shop/category.html'
-    paginate_by = 3
+    paginate_by = 12
 
     def get_queryset(self):  # new
         query = self.request.GET.get('q')
@@ -71,13 +74,26 @@ class ShopSearchResultsListView(LoginRequiredMixin, ListView):
 class ShopDetailView(LoginRequiredMixin, DetailView):
     template_name = 'shop/single-product.html'
     context_object_name = 'product'
-    extra_context = {'comments': Comment}
-
+    extra_context = {'comments': Comment, 'reviews': Review, 'form': RateForm}
     model = Product
+
+    def post(self, request, *args, **kwargs):
+        form = RateForm(request.POST)
+        if form.is_valid():
+            post = self.get_object()
+            form.instance.user = request.user
+            form.instance.post = post
+            form.save()
+
+            return HttpResponseRedirect(reverse('single_shop', args=[str(post.id), str(post.slug)]))
+        else:
+            post = self.get_object()
+            return HttpResponseRedirect(reverse('single_shop', args=[str(post.id), str(post.slug)]))
 
     def get_context_data(self, *args, **kwargs):
         context = super(ShopDetailView, self).get_context_data()
 
         stuff = get_object_or_404(Product, id=self.kwargs['pk'])
         context['total_likes'] = stuff.total_likes()
+
         return context
