@@ -132,7 +132,11 @@
 						</div>
 						<div class="card_area d-flex align-items-center">
 							<a class="icon_btn" href="#"><i class="lnr lnr lnr-diamond"></i></a>
-							<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>
+							<form action="{% url 'product_like' product.pk %}" method="post">
+								{% csrf_token %}
+								<button type="submit", name="product_id" value="{{ product.id }}">Like<button/> - {{total_likes}}
+								<form/>
+
 						</div>
 					</div>
 				</div>
