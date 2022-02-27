@@ -18,7 +18,7 @@ def LikeView(request, pk):
     return HttpResponseRedirect(reverse('single_shop', args=[str(pk), str(post.slug)]))
 
 
-class ShopView(ListView, LoginRequiredMixin):
+class ShopView(LoginRequiredMixin, ListView):
     template_name = 'shop/category.html'
     model = Product
     paginate_by = 12
@@ -37,7 +37,7 @@ def shop_category(request, slug):
     return render(request, 'shop/category.html', {'products': posts, 'categories': Category.objects.all(), 'page_obj': page_obj})
 
 
-class ShopSearchResultsListView(ListView, LoginRequiredMixin):
+class ShopSearchResultsListView(LoginRequiredMixin, ListView):
     model = Product
     context_object_name = 'products'
     template_name = 'shop/category.html'
@@ -50,7 +50,7 @@ class ShopSearchResultsListView(ListView, LoginRequiredMixin):
         )
 
 
-class ShopDetailView(DetailView, LoginRequiredMixin):
+class ShopDetailView(LoginRequiredMixin, DetailView):
     model = Product
     template_name = 'shop/single-product.html'
     context_object_name = 'product'
