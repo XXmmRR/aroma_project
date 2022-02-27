@@ -145,3 +145,5 @@ MEDIA_ROOT = str(BASE_DIR.joinpath('media'))
 CRISPY_TEMPLATE_PACK = 'uni_form'
 
 CART_SESSION_ID = 'cart'
+
+# nice
