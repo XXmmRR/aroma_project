@@ -40,9 +40,9 @@
                 <ul class="dropdown-menu">
                   <li class="nav-item"><a class="nav-link" href="{% url 'shop' %}">Shop Category</a></li>
                   <li class="nav-item"><a class="nav-link" href="{% url 'shop' %}">Product Details</a></li>
-                  <li class="nav-item"><a class="nav-link" href="checkout.html">Product Checkout</a></li>
-                  <li class="nav-item"><a class="nav-link" href="confirmation.html">Confirmation</a></li>
-                  <li class="nav-item"><a class="nav-link" href="cart.html">Shopping Cart</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#">Product Checkout</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#">Confirmation</a></li>
+                  <li class="nav-item"><a class="nav-link" href="{% url 'cart_detail' %}">Shopping Cart</a></li>
                 </ul>
 							</li>
               <li class="nav-item submenu dropdown">
@@ -57,12 +57,12 @@
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                   aria-expanded="false">Pages</a>
                 <ul class="dropdown-menu">
-									<li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
-                  <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>									
-                  <li class="nav-item"><a class="nav-link" href="tracking-order.html">Tracking</a></li>
+									<li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+                  <li class="nav-item"><a class="nav-link" href="{% url 'signup' %}">Register</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#">Tracking</a></li>
                 </ul>
               </li>
-              <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
             </ul>
 
             <ul class="nav-shop">
