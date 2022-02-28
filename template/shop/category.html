@@ -108,7 +108,7 @@
                 <form action="#">
                   <ul>
                       {% for category in categories.all %}
-                    <li class="filter-list"><input class="pixel-radio" type="radio" id="men" name="brand"><label for="men"><span> <a href="{% url 'shop_category' category.slug %}">{{ category.name }}</a></span></label></li>
+                    <li class="filter-list"><span> <a href="{% url 'shop_category' category.slug %}">{{ category.name }}</a></span></label></li>
                       {% endfor %}
                       <label for="viewCountMin">Minimum price</label>
                       <input type="number" min=0 class="form-control" id="viewCountMin" placeholder="0" name="view_count_min">
